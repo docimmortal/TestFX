@@ -26,9 +26,35 @@ public class Card {
 		FileInputStream input2 = new FileInputStream("images/CardBack.png");
 		Image image2 = new Image(input2, 100, 140, false, false);
 		cardBack = new ImageView(image2);
+		
 		cardFaceUp = new Button();
+		cardFaceUp.setOnAction(e -> flipToShow());
+		cardFaceUp.setPrefSize(100,140);
+		cardFaceUp.setGraphic(cardBack);
+		
+		this.id=id;
+		faceUp=false;
+		matchFound=false;
+		justFlipped=false;
+	}
+	
+	public Card(String filename, int id, int xLoc, int yLoc) throws FileNotFoundException {
+		FileInputStream input = new FileInputStream("images/"+filename);
+		Image image1 = new Image(input, 100, 140, false, false);
+		cardFace = new ImageView(image1);
+		
+		// Initially the card backs are shown.
+		FileInputStream input2 = new FileInputStream("images/CardBack.png");
+		Image image2 = new Image(input2, 100, 140, false, false);
+		cardBack = new ImageView(image2);
+		
+		cardFaceUp = new Button();
+		cardFaceUp.setLayoutX(xLoc);
+		cardFaceUp.setLayoutY(yLoc);
+		
 		cardFaceUp.setGraphic(cardBack);
 		cardFaceUp.setOnAction(e -> flipToShow());
+		
 		this.id=id;
 		faceUp=false;
 		matchFound=false;
@@ -40,14 +66,12 @@ public class Card {
 	}
 	
 	public void flipToShow() {
-		System.out.println("Showing "+id);
 		cardFaceUp.setGraphic(cardFace);
 		faceUp=true;
 		justFlipped=true;
 	}
 
 	public void flipToHide() {
-		System.out.println("Hiding "+id);
 		cardFaceUp.setGraphic(cardBack);
 		justFlipped=false;
 		faceUp=false;
