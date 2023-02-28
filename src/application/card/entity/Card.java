@@ -19,12 +19,12 @@ public class Card {
 
 	public Card(String filename, int id) throws FileNotFoundException {
 		FileInputStream input = new FileInputStream("images/"+filename);
-		Image image1 = new Image(input);
+		Image image1 = new Image(input, 100, 140, false, false);
 		cardFace = new ImageView(image1);
 		
 		// Initially the card backs are shown.
 		FileInputStream input2 = new FileInputStream("images/CardBack.png");
-		Image image2 = new Image(input2);
+		Image image2 = new Image(input2, 100, 140, false, false);
 		cardBack = new ImageView(image2);
 		cardFaceUp = new Button();
 		cardFaceUp.setGraphic(cardBack);
