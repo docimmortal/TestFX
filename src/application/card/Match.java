@@ -1,6 +1,5 @@
 package application.card;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
 
 import application.card.entity.Card;

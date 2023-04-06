@@ -1,10 +1,9 @@
 package application.card.entity;
 
-import java.io.FileInputStream;
 import java.io.IOException;
 
+import application.images.ImageUtilities;
 import javafx.scene.control.Button;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
 public class Card {
@@ -18,16 +17,8 @@ public class Card {
 	private boolean justFlipped;
 
 	public Card(String filename, int id) throws IOException {
-		FileInputStream input = new FileInputStream("images/"+filename);
-		Image image1 = new Image(input, 100, 140, false, false);
-		cardFace = new ImageView(image1);
-		input.close();
-		
-		// Initially the card backs are shown.
-		FileInputStream input2 = new FileInputStream("images/CardBack.png");
-		Image image2 = new Image(input2, 100, 140, false, false);
-		cardBack = new ImageView(image2);
-		input2.close();
+		cardFace = ImageUtilities.createImageView(filename, 100, 140);
+		cardBack = ImageUtilities.createImageView("CardBack.png", 100, 140);
 		
 		cardFaceUp = new Button();
 		cardFaceUp.setOnAction(e -> flipToShow());
@@ -41,28 +32,9 @@ public class Card {
 	}
 	
 	public Card(String filename, int id, int xLoc, int yLoc) throws IOException {
-		FileInputStream input1 = new FileInputStream("images/"+filename);
-		Image image1 = new Image(input1, 100, 140, false, false);
-		cardFace = new ImageView(image1);
-		input1.close();
-		
-		// Initially the card backs are shown.
-		FileInputStream input2 = new FileInputStream("images/CardBack.png");
-		Image image2 = new Image(input2, 100, 140, false, false);
-		cardBack = new ImageView(image2);
-		input2.close();
-		
-		cardFaceUp = new Button();
+		this(filename, id);	
 		cardFaceUp.setLayoutX(xLoc);
 		cardFaceUp.setLayoutY(yLoc);
-		
-		cardFaceUp.setGraphic(cardBack);
-		cardFaceUp.setOnAction(e -> flipToShow());
-		
-		this.id=id;
-		faceUp=false;
-		matchFound=false;
-		justFlipped=false;
 	}
 	
 	public Button getCardDisplay() {
