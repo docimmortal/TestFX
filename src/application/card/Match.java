@@ -1,6 +1,7 @@
 package application.card;
 
 import java.io.FileNotFoundException;
+import java.io.IOException;
 
 import application.card.entity.Card;
 import javafx.application.Application;
@@ -19,7 +20,7 @@ public class Match extends Application {
 	private static int locations[];
 	private static int oldLocations[];
 
-	public static void main(String[] args) throws FileNotFoundException {
+	public static void main(String[] args) throws Exception {
 		launch(args);
 	}
 	
@@ -82,7 +83,7 @@ public class Match extends Application {
 		resetLocations();
 	}
 	
-	private static void setupNewGame() throws FileNotFoundException {
+	private static void setupNewGame() throws IOException {
 		cards = new Card[4][2];
 		cards[0][0] = new Card("Music.png",1);
 		cards[0][1] = new Card("Music.png",1);
